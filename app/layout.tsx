@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "NoteHub - note taking app built with Next.js",
   openGraph: {
   type: 'website',
-  url: "https://example.com",
+  url: "https://08-zustand-omega-woad.vercel.app/",
   title: "NoteHub",
   description: "NoteHub - note taking app built with Next.js",
   siteName: "NoteHub",

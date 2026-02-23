@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = "https://your-domain.com"; // <- заміни на свій Vercel/Render URL
+const SITE_URL = "https://08-zustand-omega-woad.vercel.app/"; 
 
 type PageProps = {
   params: { id: string };
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const note = await fetchNoteById(id);
 
-  // якщо API може повернути null/undefined — безпечний fallback
+
   if (!note) {
     const title = `Note not found | NoteHub`;
     const description = `This note does not exist.`;

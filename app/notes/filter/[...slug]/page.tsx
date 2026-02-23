@@ -10,7 +10,7 @@ export const revalidate = 0;
 const TAGS: NoteTag[] = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 const PER_PAGE = 12;
 
-const SITE_URL = "https://your-domain.com"; // <- заміни на URL деплою (Vercel)
+const SITE_URL = "https://08-zustand-omega-woad.vercel.app/";
 
 type PageProps = {
   params: { slug: string[] };
