@@ -10,37 +10,37 @@ export const revalidate = 0;
 const TAGS: NoteTag[] = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 const PER_PAGE = 12;
 
-const SITE_URL = "https://08-zustand-omega-woad.vercel.app/";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const OG_IMAGE = "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg";
 
 type PageProps = {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const tagFromUrl = params.slug?.[0] ?? "all";
+  const { slug } = await params;
+  const tagFromUrl = slug?.[0] ?? "all";
 
   const title = `Notes tagged with "${tagFromUrl}" | NoteHub`;
   const description = `Browse notes tagged with "${tagFromUrl}" in NoteHub.`;
-  const url = `${SITE_URL}/notes/filter/${params.slug?.join("/") ?? ""}`;
+  const url = `${SITE_URL}/notes/filter/${slug?.join("/") ?? ""}`;
 
   return {
     title,
     description,
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
       url,
-      images: [
-        {
-          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-        },
-      ],
+      images: [{ url: OG_IMAGE }],
     },
   };
 }
 
 export default async function NotesByTagPage({ params }: PageProps) {
-  const tagFromUrl = params.slug?.[0] ?? "all";
+  const { slug } = await params;
+  const tagFromUrl = slug?.[0] ?? "all";
 
   const tag: "" | NoteTag =
     tagFromUrl === "all"

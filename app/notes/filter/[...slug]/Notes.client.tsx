@@ -24,15 +24,12 @@ export default function NotesClient({ initialTag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-  const [tag] = useState<"" | NoteTag>(initialTag ?? "");
 
-  const { data, isLoading, isError, error } = useQuery<
-    FetchNotesResponse,
-    Error
-  >({
+  const tag: "" | NoteTag = initialTag ?? "";
+
+  const { data, isLoading, isError, error } = useQuery<FetchNotesResponse, Error>({
     queryKey: ["notes", page, debouncedSearch, tag],
-    queryFn: () =>
-      fetchNotes({ page, perPage: PER_PAGE, search: debouncedSearch, tag }),
+    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search: debouncedSearch, tag }),
     placeholderData: (prev) => prev,
   });
 
